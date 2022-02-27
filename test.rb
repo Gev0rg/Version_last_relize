@@ -1,8 +1,8 @@
 require './function'
 require 'minitest/autorun'
 
-class Test < MiniTest::Unit::TestCase
-  def version_1
+class Test < MiniTest::Test
+  def test_1
     paid_till = Date.new(2020, 7)
     max_version = Date.new(2020, 2)
     min_version = Date.new(2019, 1)
@@ -10,7 +10,7 @@ class Test < MiniTest::Unit::TestCase
     assert_equal ['20.02'], version(paid_till, max_version, min_version, flvget)
   end
 
-  def version_2
+  def test_2
     paid_till = Date.new(2021, 7)
     max_version = nil
     min_version = nil
