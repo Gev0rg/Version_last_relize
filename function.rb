@@ -4,19 +4,11 @@ def version(paid_till, max_version, min_version, flvget)
   smallest_max = [paid_till, max_version, flvget].select { |i| !i.nil? }.min # наименьший максимум
   version_array = [] # сюда попадут все подходящие версии
   t = true # если останется true, значит не было найдено версии среди пяти последних релизов Флюссоника
-  if min_version.nil? # если нет минимума, то в поиске его не учитываю
-    4.downto(0) do |i|
-      if (flvget << i) <= smallest_max
-        version_array << (flvget << i)
-        t = false
-      end
-    end
-  else
-    4.downto(0) do |i|
-      if (flvget << i) <= smallest_max && (flvget << i) >= min_version
-        version_array << (flvget << i)
-        t = false
-      end
+  min_version = Date.new(988, 1) if min_version.nil? # если нет минимума, то устанавливаю дату принятия
+  4.downto(0) do |i|                                 # христианства на Руси ;)
+    if (flvget << i) <= smallest_max && (flvget << i) >= min_version
+      version_array << (flvget << i)
+      t = false
     end
   end
   version_array << smallest_max if t # записываю максимум в массив, если не было найдено ни одной версии
